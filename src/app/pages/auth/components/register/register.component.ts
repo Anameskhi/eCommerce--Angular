@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/services';
 import { PasswordValidate } from 'src/app/validators/password.validator';
 
 @Component({
@@ -41,13 +42,22 @@ export class RegisterComponent implements OnInit {
     )
   
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
 
   submit(){
     this.form.markAllAsTouched()
-  }
+    if(this.form.invalid)return;
 
+    console.log(this.form.value)
+
+    this.authService.register(this.form.value).subscribe(res =>{
+      console.log(res)
+    })
+  }
+ 
 }

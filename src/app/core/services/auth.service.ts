@@ -20,6 +20,11 @@ export class AuthService  extends BaseService{
   }
   register(payload: Register):Observable<User>{
     return this.post<User>('auth/signup', payload)
+    .pipe(
+      tap((response: User)=>{
+        this.setToken(response.email);
+      })
+    )
   }
  
   logOut(){

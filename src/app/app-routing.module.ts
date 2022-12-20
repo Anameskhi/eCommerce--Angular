@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/auth.guard';
 import { MainLayoutComponent } from './features/main-layout/main-layout.component';
 
 const routes: Routes = [
@@ -21,10 +22,12 @@ const routes: Routes = [
       },
       {
         path: 'cart',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./pages/cart/cart.module').then(m=> m.CartModule)
       },
       {
         path: 'orders',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./pages/order/order.module').then(m=> m.OrderModule)
       },
 

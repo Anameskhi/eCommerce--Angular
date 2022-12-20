@@ -6,33 +6,35 @@
           <a routerLink=""><img src="/assets/images/logo.jpg" class="logo"></a>
         </div>
    
-        <li class="nav-item ">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+       
         <li class="nav-item">
-          <a class="nav-link " href="#" tabindex="-1" >Link</a>
+          <a class="nav-link " href="#" tabindex="-1" routerLink="/cart" >Cart</a>
         </li>
-
+        <ng-container *ngIf="userIsAuthenticated">
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             
             <i class="fas fa-chevron-circle-down fa-lg"></i>
 
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Log out</a></li>
-          </ul>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" routerLink="/products">Content Manager</a></li>
+              <li><a class="dropdown-item" routerLink="/orders">Order</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="logOut()" >Log out</a></li>
+            </ul>
+         
         </li>
-       
+      </ng-container>
+
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success mr-3" type="submit">Search</button>
+        <ng-container *ngIf="!userIsAuthenticated">
         <a class="btn btn-outline-secondary mr-1" routerLink="/auth/login">Login</a>
         <a class="btn btn-outline-secondary  mr-1" routerLink="/auth/register">Sign up</a>
+      </ng-container>
         <!-- <ng-container class="nav-item dropdown ">
         <a
         class="nav-link dropdown-toggle"

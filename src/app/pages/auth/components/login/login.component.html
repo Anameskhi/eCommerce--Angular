@@ -1,18 +1,36 @@
 <div class="col-md-4 col-md-offset-4" id="login">
   <section id="inner-wrapper" class="login">
     <article>
-      <form>
+      <form [formGroup]="form" (submit)="submit()">
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-text"><i class="fa fa-envelope"> </i></span>
-            <input type="email" class="form-control" placeholder="Email Address">
+            <input 
+            type="email" 
+            class="form-control" 
+            placeholder="Email Address"
+            formControlName="email"
+            [class.is-invalid]="getEmail?.invalid && getEmail?.touched"
+            [class.is-valid]="getEmail?.valid && getEmail?.touched">
           </div>
+          <small class="text-danger" *ngIf="getEmail?.errors?.['required'] && getEmail?.touched">Email is required</small>
+          <small class="text-danger" *ngIf="getEmail?.errors?.['email'] && getEmail?.touched">Email form isn't correct</small>
         </div>
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-text"><i class="fa fa-key"> </i></span>
-            <input type="password" class="form-control" placeholder="Password">
+            <input 
+            type="password" 
+            class="form-control" 
+            placeholder="Password"
+            formControlName="password"
+            [class.is-invalid]="getPassword?.invalid && getPassword?.touched"
+            [class.is-valid]="getPassword?.valid && getPassword?.touched">
           </div>
+          <small class="text-danger" *ngIf="getPassword?.errors?.['required'] && getPassword?.touched">Password is required</small>
+          <small class="text-danger" *ngIf="getPassword?.errors?.['minlength'] && getPassword?.touched">Password form should be more then 3 digit</small>
+          <small class="text-danger" *ngIf="getPassword?.errors?.['maxlength'] && getPassword?.touched">Password form should be less then 10 digit</small>
+
         </div>
           <button type="submit" class="btn btn-dark btn-block">Log in</button>
       </form>

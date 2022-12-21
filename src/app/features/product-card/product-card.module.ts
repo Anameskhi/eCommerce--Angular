@@ -15,4 +15,6 @@ import { ProductCardComponent } from './product-card.component';
     ProductCardComponent
   ]
 })
-export class ProductCardModule { }
+export class ProductCardModule { 
+  
+}

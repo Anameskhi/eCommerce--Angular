@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services';
+import { Observable } from 'rxjs';
+import { AuthService, CartService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,11 @@ import { AuthService } from 'src/app/core/services';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  cartCount$: Observable<number> = this.cartService.cartCount$
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService
 
   ) { }
 
@@ -21,6 +24,6 @@ export class HeaderComponent implements OnInit {
   }
   logOut(){
     this.authService.logOut()
-    
+
   }
 }

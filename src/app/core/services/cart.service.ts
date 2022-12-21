@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { BaseService } from './base.service';
 
 @Injectable({
@@ -31,12 +31,10 @@ export class CartService extends BaseService{
     )
   }
 
-  // get cart(): string | null {
-  //   const cart = localStorage.getItem('cart')
-  //   return cart ? JSON.parse(cart) : null
-  // }
+  deleteItem(id: number): Observable<any>{
+    return this.delete(`cart/${id}`)
+   
+  }
 
-  // setCart(cart: string): void{
-  //   localStorage.setItem('cart', JSON.stringify(cart))
-  // }
+  
 }

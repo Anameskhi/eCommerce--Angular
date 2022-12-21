@@ -8,6 +8,14 @@ import { BaseService } from './base.service';
 })
 export class AuthService  extends BaseService{
 
+  get token(): string | null{
+    return localStorage.getItem('token')
+  }
+  get user(): User | null {
+    const user = localStorage.getItem('user')
+    return user ? JSON.parse(user) : null
+
+  }
 
   Login(payload: Login):Observable<LoginResponse>{
     return this.post<LoginResponse>('auth/login',payload)
@@ -27,22 +35,15 @@ export class AuthService  extends BaseService{
     )
   }
  
-  logOut(){
-    localStorage.clear()
-  }
+ 
   setToken(token: string): void{
     localStorage.setItem('token', token)
   }
   setUser(user: User): void{
     localStorage.setItem('user', JSON.stringify(user))
   }
-  get token(): string | null{
-    return localStorage.getItem('token')
-  }
-  get user(): User | null {
-    const user = localStorage.getItem('user')
-    return user ? JSON.parse(user) : null
-
+  logOut(){
+    localStorage.clear()
   }
  
 }

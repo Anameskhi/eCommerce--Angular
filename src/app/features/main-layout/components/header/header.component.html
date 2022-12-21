@@ -47,10 +47,10 @@
       </ul>
     </ng-container> -->
     <ng-container *ngIf="userIsAuthenticated">
-      <button type="button" class="btn btn-dark" routerLink="/cart">
+      <a type="button" class="btn btn-dark" routerLink="/cart">
         Cart <span class="badge badge-danger">{{cartCount$ | async }}</span>
         <span class="sr-only">unread messages</span>
-      </button>
+      </a>
     </ng-container>
     
       </form>

@@ -11,6 +11,8 @@ import { AuthService, CartService } from 'src/app/core/services';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  errorMessage?: string
+
   get getEmail(){
     return this.form.get('email')
   }
@@ -47,17 +49,25 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     console.log(this.form.value)
 
-    this.authService.Login(this.form.value)
+    this.authService.login(this.form.value)
     .pipe(
       takeUntil(this.sub$),
       tap( res =>{
         this.cartService.getCarts().subscribe()
       })
     )
-    .subscribe(res =>{
-      console.log(res)
+    .subscribe({
+      next: res =>{
+      if(res){
       this.router.navigate(['/'])
-    })
+      }
+    },
+      error: ({error}) => {
+       
+    console.log(error.message)
+       this.errorMessage = error.message
+      }
+ })
    
   }
   ngOnDestroy(): void {

@@ -10,6 +10,8 @@ import { PasswordValidate } from 'src/app/validators/password.validator';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  errorMessage?: string
+
   get getFirstName(){
     return this.form.get('firstName')
   }
@@ -57,9 +59,18 @@ export class RegisterComponent implements OnInit {
 
     console.log(this.form.value)
 
-    this.authService.register(this.form.value).subscribe(res =>{
-      console.log(res)
-      this.router.navigate(['/'])
+    this.authService.register(this.form.value)
+    .subscribe({
+      next: res =>{
+        if(res){
+        this.router.navigate(['/'])
+        }
+      },
+        error: ({error}) => {
+         
+      console.log(error.message)
+         this.errorMessage = error.message
+        }
 
     })
 

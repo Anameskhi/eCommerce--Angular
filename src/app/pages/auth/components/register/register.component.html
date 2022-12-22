@@ -1,4 +1,6 @@
 <div class="col-md-4 col-md-offset-4" id="login">
+  <div *ngIf="errorMessage"  class="alert alert-danger text-center" role="alert">{{errorMessage}}</div>
+
   <section id="inner-wrapper" class="login">
     <article>
       <form [formGroup]="form" (submit)="submit()">

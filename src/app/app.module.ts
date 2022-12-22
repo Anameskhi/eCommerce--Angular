@@ -26,7 +26,8 @@ import { RegisterComponent } from './pages/auth/components/register/register.com
    { 
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
-    multi: true}
+    multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })

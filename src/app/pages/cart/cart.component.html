@@ -7,18 +7,19 @@
                   <div class="col align-self-center text-right text-muted">{{cartItems.length}} items</div>
               </div>
           </div>    
-          <ng-container *ngFor="let item of cartItems">
-            <div class="row border-top border-bottom">
+          <ng-container *ngFor="let item of cartItems" >
+              
+            <div class="row border-top border-bottom" >
                 <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                    <div class="col-2"><img class="img-fluid" [src]="item.item.image"></div>
                     <div class="col">
-                        <div class="row text-muted">title</div>
-                        <div class="row">Cotton T-shirt</div>
+                        <div class="row text-muted">{{item.item.name}}</div>
+                        <div class="row">{{item.item.description}}</div>
                     </div>
                     <div class="col">
                         <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
                     </div>
-                    <div class="col">&euro; 20 button <button (click)="removeItem(item)" class="close">&#10005;</button></div>
+                    <div class="col"> {{item.item.price | currency: 'USD'}}  <button (click)="removeItem(item)" class="close">&#10005;</button></div>
                 </div>
             </div>
           </ng-container>
@@ -31,12 +32,12 @@
           <div><h5><b>Summary</b></h5></div>
           <hr>
           <div class="row">
-              <div class="col" style="padding-left:0;">ITEMS 3</div>
-              <div class="col text-right">&euro; 132.00</div>
+              <div class="col" style="padding-left:0;">ITEM(S) {{cartItems.length}}</div>
+              <div class="col text-right">{{ cartSum| currency: 'USD'}}</div>
           </div>
           <form>
               <p>SHIPPING</p>
-              <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+              <select><option class="text-muted">Standard-Delivery- 5.00$</option></select>
               <p>GIVE CODE</p>
               <input id="code" placeholder="Enter your code">
           </form>

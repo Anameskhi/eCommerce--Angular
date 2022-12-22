@@ -28,6 +28,8 @@ export class CartComponent implements OnInit {
        this.cartItems = res
        this.cartSum = this.cartItems.reduce((acc, item) => acc + item.total, 0)
      })
+     console.log(this.cartItems)
+
   }
 
   removeItem(item: Cart){
@@ -38,5 +40,4 @@ export class CartComponent implements OnInit {
     })
 
   }
-
 }

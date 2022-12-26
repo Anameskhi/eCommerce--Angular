@@ -61,13 +61,17 @@ export class ProductAddEditComponent implements OnInit {
     this.route.params.pipe(
       switchMap((params: any)=>{
         if(params['id']){
+          this.productId = params['id']
           return this.productsService.getOne(params['id'])
         }
         return of(null)
       })
     ).subscribe(res => {
       if(res){
-        this.form.patchValue(res)
+        this.form.patchValue({
+          ...res,
+          categoryId: res.category.id
+        })
       }
     })
   }

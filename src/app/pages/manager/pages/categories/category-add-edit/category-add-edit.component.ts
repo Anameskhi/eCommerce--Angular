@@ -15,7 +15,7 @@ export class CategoryAddEditComponent implements OnInit {
 }
 
 form: FormGroup = new FormGroup({
-  id: new FormControl(null),
+  id: new FormControl(''),
   categoryName: new FormControl('', Validators.required),
 })
 
@@ -48,7 +48,7 @@ submit() {
 
   if (this.form.value.id) {
     this.categoryService.update(this.form.value.id, this.form.value)
-      .pipe()
+      .pipe() 
       .subscribe(res => {
         this.router.navigate(['/manager/categories'])
           .then(() => {

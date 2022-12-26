@@ -1,0 +1,43 @@
+<div  class="container">
+  <div class="d-flex justify-content-between align-items-center">
+    <div> <h4>Products</h4> </div>
+    <div>
+      <button class="btn btn-dark" routerLink="/manager/products/create">Add Product</button>
+    </div>
+
+  </div>
+
+
+</div>
+<table class="table m-3">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+      <th scope="col">actions</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container >
+      <tr *ngFor="let product of products, let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>
+        <img [src]="product.image" style="width:50px">  
+        </td>
+        <td>{{product.name}}</td>
+        <td>{{product.price | currency : 'USD'}}</td>
+        <td>{{product?.category?.name}}</td>
+        <td>
+            <button  routerLink="/manager/products/edit/{{product.id}}" class="btn btn-outline-secondary btn-right-spacing"><i class="fas fa-edit errspan"></i></button>
+            <button (click)="deleteItem(product.id)" class="btn btn-outline-danger btn-right-spacing "><i class="fa fa-trash errspan" aria-hidden="true" ></i></button>
+        </td>
+      </tr>
+    </ng-container>
+  
+    
+  </tbody>
+</table>

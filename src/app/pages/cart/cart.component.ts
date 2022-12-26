@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart } from 'src/app/core/interfaces';
-import { CartService } from 'src/app/core/services';
+import { CartService, OrderService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +14,8 @@ export class CartComponent implements OnInit {
   cartSum = 0
 
   constructor(
-    private cartService:CartService
+    private cartService:CartService,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -39,5 +40,32 @@ export class CartComponent implements OnInit {
       this.getcarts()
     })
 
+  }
+  checkout(){
+  
+
+    this.orderService.createOrder()
+    .pipe()
+    .subscribe(res => {
+      console.log(res)
+      this.getcarts()
+    })
+  }
+
+  minus(item: Cart){
+    this.cartItems.forEach((eachItem)=>{
+      if(eachItem.item.id === item.item.id)
+      eachItem.quantity--
+      if(item.quantity === 0){
+        this.removeItem(item)
+      }
+    })
+    
+  }
+  plus(item: Cart){
+    this.cartItems.forEach((eachItem)=>{
+      if(eachItem.item.id === item.item.id)
+      eachItem.quantity++
+    })
   }
 }

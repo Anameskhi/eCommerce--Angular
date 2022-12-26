@@ -10,26 +10,32 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./pages/home/home.module').then(m=> m.HomeModule)
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
       },
       {
         path: 'auth',
-        loadChildren: () => import('./pages/auth/auth.module').then(m=> m.AuthModule)
+        loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
       },
       {
         path: 'products',
-        loadChildren: () => import('./pages/products/products.module').then(m=> m.ProductsModule)
+        loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule)
       },
       {
         path: 'cart',
         canActivate: [AuthGuard],
-        loadChildren: () => import('./pages/cart/cart.module').then(m=> m.CartModule)
+        loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)
       },
       {
         path: 'orders',
         canActivate: [AuthGuard],
-        loadChildren: () => import('./pages/order/order.module').then(m=> m.OrderModule)
+        loadChildren: () => import('./pages/order/order.module').then(m => m.OrderModule)
       },
+      {
+        path: 'manager',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./pages/manager/manager.module').then(m => m.ManagerModule)
+      }
+   
 
     ]
   }

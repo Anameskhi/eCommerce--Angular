@@ -17,11 +17,12 @@
                         <div class="row">{{item.item.description}}</div>
                     </div>
                     <div class="col">
-                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                        <a  style="cursor: pointer;" (click)="minus(item)" >-</a><a href="#" class="border">{{item.quantity}}</a><a style="cursor: pointer;" (click)="plus(item)" >+</a>
                     </div>
-                    <div class="col"> {{item.item.price | currency: 'USD'}}  <button (click)="removeItem(item)" class="close">&#10005;</button></div>
+                    <div class="col"> {{item.item.price * item.quantity  | currency: 'USD'}}  <button (click)="removeItem(item)" class="close">&#10005;</button></div>
                 </div>
             </div>
+            
           </ng-container>
          
           
@@ -33,7 +34,7 @@
           <hr>
           <div class="row">
               <div class="col" style="padding-left:0;">ITEM(S) {{cartItems.length}}</div>
-              <div class="col text-right">{{ cartSum| currency: 'USD'}}</div>
+              <div class="col text-right">{{ cartSum | currency: 'USD'}}</div>
           </div>
           <form>
               <p>SHIPPING</p>
@@ -45,7 +46,7 @@
               <div class="col">TOTAL PRICE</div>
               <div class="col text-right">{{cartSum | currency: 'USD'}}</div>
           </div>
-          <button class="btn">CHECKOUT</button>
+          <button class="btn" [disabled]="cartSum===0" (click)="checkout()">CHECKOUT</button>
       </div>
   </div>
   

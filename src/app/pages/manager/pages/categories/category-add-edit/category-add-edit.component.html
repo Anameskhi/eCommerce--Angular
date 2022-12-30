@@ -16,7 +16,7 @@
           <small class="text-danger" *ngIf="getCategoryName?.invalid && getCategoryName?.touched" >Category name is required</small>
         </div>
 
-          <button type="submit" class="btn btn-dark btn-block">Create</button>
+          <button type="submit" class="btn btn-dark btn-block">{{ categoryId? 'Update': 'Create'}}</button>
       </form>
     </article>
   </section>

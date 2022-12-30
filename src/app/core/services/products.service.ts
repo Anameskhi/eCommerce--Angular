@@ -9,7 +9,7 @@ import { BaseService } from './base.service';
 export class ProductsService extends BaseService{
 
   getProducts(params:{
-    ProductId?: number,
+    categoryId?: number | null,
     limit?: number,
     search?: string,
   }): Observable<Product[]>{

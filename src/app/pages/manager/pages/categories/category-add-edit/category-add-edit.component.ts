@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of, switchMap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
@@ -9,63 +9,62 @@ import { CategoryService } from 'src/app/core/services/category.service';
   templateUrl: './category-add-edit.component.html',
   styleUrls: ['./category-add-edit.component.scss']
 })
-export class CategoryAddEditComponent implements OnInit {
+export class CategoryAddEditComponent implements OnInit,OnDestroy {
+  
   get getCategoryName(){
     return this.form.get('categoryName')
-}
+  }
+  
 
-form: FormGroup = new FormGroup({
-  id: new FormControl(''),
-  categoryName: new FormControl('', Validators.required),
-})
-
-constructor(
-  private categoryService: CategoryService,
-  private route: ActivatedRoute,
-  private router: Router
-) {
-}
-
-ngOnInit(): void {
-  this.route.params.pipe(
-    switchMap((params: any) => {
-      if (params['id']) {
-        return this.categoryService.getOne(params['id'])
-      }
-      return of(null)
-    })
-  ).subscribe(res => {
-    if (res) {
-      this.form.patchValue(res)
-    }
+  form: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    categoryName: new FormControl(null,Validators.required),
+    
   })
-}
 
-submit() {
-  if (this.form.invalid) {
-    return
+  constructor(
+    private categoriesService: CategoryService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+  sub$ = new Subject()
+  categoryId: string | undefined
+
+  ngOnInit(): void {
+    this.route.params
+    .pipe(takeUntil(this.sub$))
+    .subscribe(params => {
+      if(params['id']){
+        this.categoryId = params['id']
+        this.categoriesService.getOne(params['id']).subscribe(category => {
+          console.log(category)
+        })
+      }
+    })
+  
+  }
+  ngOnDestroy(): void {
+    this.sub$.next(null)
+    this.sub$.complete()
   }
 
-  if (this.form.value.id) {
-    this.categoryService.update(this.form.value.id, this.form.value)
-      .pipe() 
-      .subscribe(res => {
+  submit(){
+    console.log(this.form.value)
+    this.form.markAllAsTouched()
+    if(this.form.invalid)return;
+    
+    if(this.form.value.id){
+      this.categoriesService.update(this.form.value.id,this.form.value)
+      .pipe(takeUntil(this.sub$))
+      .subscribe(()=>{
         this.router.navigate(['/manager/categories'])
-          .then(() => {
-            this.form.reset()
-          })
       })
-  } else {
-    this.categoryService.create(this.form.value)
-      .pipe()
-      .subscribe(res => {
-        this.router.navigate(['/manager/categories'])
-          .then(() => {
-            this.form.reset()
-          })
-      })
+    } else {
+    this.categoriesService.create(this.form.value)
+    .subscribe(()=>{
+      this.router.navigate(['/manager/categories'])
+    })
   }
-
 }
 
 }

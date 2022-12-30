@@ -1,0 +1,26 @@
+
+  <div>
+    <div class="row">
+      <div class="col-2 m-3">
+        <div class="list-group border-radius" id="list-tab" role="tablist">
+          <button class="list-group-item list-group-item-action text-center" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile" disabled>Menu</button>
+          <a class="list-group-item list-group-item"  [routerLink]="['/main-products']" >All Products</a>
+          <a *ngFor="let category of categories$ | async" 
+          class="list-group-item list-group-item-action" 
+          id="list-messages-list" data-toggle="list" 
+          [routerLink]="['/main-products']" 
+          [queryParams]="{category: category.id}"
+          routerLinkActive="activeLink" 
+          >{{category.name}}</a>
+        </div>
+        
+      </div>
+      <div class="row product-items md-6" >
+        <app-product-card class="col-12 col-sm-12 col-md-6 col-lg-3 text-center"  *ngFor="let product of products" [product]="product"></app-product-card>
+      </div>
+    </div>
+  
+  </div>
+
+  
+  

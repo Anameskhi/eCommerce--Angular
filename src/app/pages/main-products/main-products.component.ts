@@ -16,6 +16,7 @@ export class MainProductsComponent implements OnInit {
   categoryId?: number 
   
   categories$: Observable<Category[]> = this.categoryService.getAll()
+  search: any
   
   constructor(
     private productsService: ProductsService,
@@ -33,13 +34,24 @@ export class MainProductsComponent implements OnInit {
 
   getProducts(){
     const params = {
-      categoryId: this.categoryId
+      categoryId: this.categoryId,
+      search: this.search || null
     }
     this.productsService.getProducts(params)
      .pipe()
      .subscribe(res => {
       this.products = res
     })
+  }
+  searchHandle(search: string){
+    if(search.length > 3){
+      this.search = search
+     this.getProducts()
+    }else{
+      this.search = null
+      this.getProducts()
+    }
+
   }
 
 }

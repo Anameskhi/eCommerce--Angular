@@ -1,0 +1,53 @@
+<div class="card" style="margin-top: 20px">
+  <div class="row">
+      <div class="col-md-8 cart">
+
+          <div class="title">
+              <div class="row">
+                  <div class="col"><h4><b>Orders</b></h4></div>
+                  <div class="col align-self-center text-right text-muted">{{orders.length}} Order(s)</div>
+              </div>
+          </div>  
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Order Date</th>
+                <th>Total Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+          </table>  
+          <ng-container  *ngFor="let order of orders">
+              
+            <div class="row border-top border-bottom" >
+                <div class="row main align-items-center">
+                    <div class="col-2">{{order.items.image}}</div>
+                    <div class="col">
+                        <div class="row text-muted">{{order.createdAt | date: 'dd.MM.yyyy HH:mm'}}</div>
+                    </div>
+                  
+
+                    <div class="col text-center"> {{order.subTotal | currency:  "USD"}}  </div>
+                    <div class="col text-center"> {{order.pending? 'Pending':'Completed'}}  <button  class="close">&#10005;</button> </div>
+                  </div>
+            </div>
+            
+          </ng-container>
+         
+          
+         
+          <a class="back-to-shop" routerLink="/" > <span class="text-muted" > &leftarrow; Back to shop</span></a>
+      </div>
+      <div class="col-md-4 summary">
+          <div><h5><b>Summary</b></h5></div>
+          <hr>
+          <div class="row">
+              <div class="col" style="padding-left:0;">ITEM(S) 5</div>
+              <div class="col text-right">500 usd</div>
+          </div>
+       </div>
+    </div>
+    </div>
+          

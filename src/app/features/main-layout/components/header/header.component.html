@@ -27,8 +27,17 @@
 
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success mr-3" type="submit">Search</button>
+        <input 
+        class="form-control me-2" 
+        type="search" 
+        placeholder="Search" 
+        aria-label="Search"
+        
+        [ngModel]="searchInput"
+        (ngModelChange)="search($event)"
+        [ngModelOptions]="{standalone:true}"
+        >
+        <button class="btn btn-outline-success mr-3" type="submit" >Search</button>
         <ng-container *ngIf="!userIsAuthenticated">
         <a class="btn btn-outline-secondary mr-1" routerLink="/auth/login">Login</a>
         <a class="btn btn-outline-secondary  mr-1" routerLink="/auth/register">Sign up</a>

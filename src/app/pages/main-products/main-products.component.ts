@@ -27,6 +27,7 @@ export class MainProductsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.categoryId = params['category']
+      this.search = params['search']
       this.getProducts()
     })
    
@@ -43,15 +44,15 @@ export class MainProductsComponent implements OnInit {
       this.products = res
     })
   }
+
   searchHandle(search: string){
     if(search.length > 3){
-      this.search = search
+     this.search = search
      this.getProducts()
-    }else{
+    }else{    
       this.search = null
       this.getProducts()
-    }
-
-  }
+    } 
+  } 
 
 }

@@ -12,6 +12,7 @@ export class ProductsService extends BaseService{
     categoryId?: number | null,
     limit?: number,
     search?: string,
+    similar?:string
   }): Observable<Product[]>{
     return this.get<Product[]>('product', params)
   }

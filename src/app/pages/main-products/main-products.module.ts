@@ -6,11 +6,13 @@ import { MainProductsComponent } from './main-products.component';
 import { ProductCardModule } from 'src/app/features/product-card/product-card.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
   declarations: [
-    MainProductsComponent
+    MainProductsComponent,
+    ProductDetailComponent
     ],
   imports: [
     CommonModule,

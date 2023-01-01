@@ -1,4 +1,4 @@
-<div  class="card">
+<div  class="card"  style="cursor:pointer" [routerLink]="['/main-products/',product.id]" >
   <img class="pic-1" src={{product.image}} alt="" class="card-image">
 
   <div class="p-2">
@@ -9,7 +9,7 @@
       {{product.price | currency: 'USD'}}
     </div>
     <div >
-      <button *appAuthAccess class="btn btn-outline-primary me-2" (click)="addToCart()" >Add to Cart</button>
+      <button *appAuthAccess class="btn btn-outline-primary me-2" (click)="addToCart($event)" >Add to Cart</button>
     </div>
   </div>
 </div>

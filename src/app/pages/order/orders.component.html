@@ -25,7 +25,6 @@
                     <div class="col">
                         <div class="row text-muted">{{order.createdAt | date: 'dd.MM.yyyy HH:mm'}}</div>
                     </div>
-                  
 
                     <div class="col text-center"> {{order.subTotal | currency:  "USD"}}  </div>
                     <div class="col text-center"> {{order.pending? 'Pending':'Completed'}}  </div>
@@ -41,9 +40,8 @@
       <div class="col-md-4 summary">
           <div><h5><b>Summary</b></h5></div>
           <hr>
-          <div class="row">
-              <div class="col" style="padding-left:0;">ITEM(S) 5</div>
-              <div class="col text-right">500 usd</div>
+          <div class="row" >
+              <div class="col" style="padding-left:0;">ITEM(S) {{orders.length}}</div>
           </div>
        </div>
     </div>

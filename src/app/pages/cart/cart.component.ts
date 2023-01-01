@@ -42,8 +42,6 @@ export class CartComponent implements OnInit {
 
   }
   checkout(){
-  
-
     this.orderService.createOrder()
     .pipe()
     .subscribe(res => {

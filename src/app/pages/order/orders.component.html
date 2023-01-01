@@ -11,7 +11,6 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Product</th>
                 <th>Order Date</th>
                 <th>Total Price</th>
                 <th>Status</th>
@@ -23,14 +22,13 @@
               
             <div class="row border-top border-bottom" >
                 <div class="row main align-items-center">
-                    <div class="col-2">{{order.items.image}}</div>
                     <div class="col">
                         <div class="row text-muted">{{order.createdAt | date: 'dd.MM.yyyy HH:mm'}}</div>
                     </div>
                   
 
                     <div class="col text-center"> {{order.subTotal | currency:  "USD"}}  </div>
-                    <div class="col text-center"> {{order.pending? 'Pending':'Completed'}}  <button  class="close">&#10005;</button> </div>
+                    <div class="col text-center"> {{order.pending? 'Pending':'Completed'}}  </div>
                   </div>
             </div>
             
